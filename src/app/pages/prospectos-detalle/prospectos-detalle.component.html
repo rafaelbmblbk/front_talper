@@ -1,0 +1,178 @@
+<div class="container mt-3">
+    <h1 class="h1">Prospecto</h1>
+    <form [formGroup]="prospectoForm" autocomplete="off" *ngIf="hideform">
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="nombre">Nombre
+                    <small *ngIf="btnSubmit && frm['nombre'].errors" class="invalid-feedback-frm">
+                        <small *ngIf="frm['nombre'].errors?.['required']">* Por favor, ingresa un nombre</small>
+                    </small>
+                </label>
+                <input type="text" class="form-control" id="nombre" [ngClass]="{ 'is-invalid-frm': btnSubmit && frm['nombre'].errors }" formControlName="nombre">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="apMaterno">Ap. Materno
+                    <small *ngIf="btnSubmit && frm['apMaterno'].errors" class="invalid-feedback-frm">
+                        <small *ngIf="frm['apMaterno'].errors?.['required']">* Por favor, ingresa un ap. Materno</small>
+                    </small>
+                </label>
+                <input type="text" class="form-control" id="apMaterno" [ngClass]="{ 'is-invalid-frm': btnSubmit && frm['apMaterno'].errors }"  formControlName="apMaterno">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="apPaterno">Ap. Paterno
+                    <small *ngIf="btnSubmit && frm['apPaterno'].errors" class="invalid-feedback-frm">
+                        <small *ngIf="frm['apPaterno'].errors?.['required']">* Por favor, ingresa un ap. Paterno</small>
+                    </small>
+                </label>
+                <input type="text" class="form-control" id="apPaterno" [ngClass]="{ 'is-invalid-frm': btnSubmit && frm['apPaterno'].errors }"  formControlName="apPaterno">
+            </div>
+        </div>
+        
+        <div class="form-row" *ngIf="fromDisable">
+            <div class="form-group col-md-12">
+                <label for="fullDireccion">Direccion</label>
+                <input type="text" class="form-control" id="fullDireccion" formControlName="fullDireccion">
+            </div>
+        </div>
+
+        <div class="form-row" *ngIf="!fromDisable">
+            <div class="form-group col-md-3">
+                <label for="nombre">Calle
+                    <small *ngIf="btnSubmit && frm['calle'].errors" class="invalid-feedback-frm">
+                        <small *ngIf="frm['calle'].errors?.['required']">* Por favor, ingresa una calle</small>
+                    </small>
+                </label>
+                <input type="text" class="form-control" id="calle" [ngClass]="{ 'is-invalid-frm': btnSubmit && frm['calle'].errors }" formControlName="calle">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="apmaterno">Número
+                    <small *ngIf="btnSubmit && frm['numero'].errors" class="invalid-feedback-frm">
+                        <small *ngIf="frm['numero'].errors?.['required']">* Por favor, ingresa un número</small>
+                    </small>
+                </label>
+                <input type="text" class="form-control" id="numero" [ngClass]="{ 'is-invalid-frm': btnSubmit && frm['numero'].errors }" formControlName="numero">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="appaterno">Colonia
+                    <small *ngIf="btnSubmit && frm['colonia'].errors" class="invalid-feedback-frm">
+                        <small *ngIf="frm['colonia'].errors?.['required']">* Por favor, ingresa una colonia</small>
+                    </small>
+                </label>
+                <input type="text" class="form-control" id="colonia" [ngClass]="{ 'is-invalid-frm': btnSubmit && frm['colonia'].errors }" formControlName="colonia">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="appaterno">C.P.
+                    <small *ngIf="btnSubmit && frm['cp'].errors" class="invalid-feedback-frm">
+                        <small *ngIf="frm['cp'].errors?.['required']">* Por favor, ingresa un cp</small>
+                    </small>
+                </label>
+                <input type="text" class="form-control" id="cp" [ngClass]="{ 'is-invalid-frm': btnSubmit && frm['cp'].errors }" formControlName="cp">
+            </div>
+        </div>
+
+
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="rfc">RFC
+                    <small *ngIf="btnSubmit && frm['rfc'].errors" class="invalid-feedback-frm">
+                        <small *ngIf="frm['rfc'].errors?.['required']">* Por favor, ingresa un rfc</small>
+                    </small> 
+                </label>
+                <input type="text" class="form-control" id="rfc" [ngClass]="{ 'is-invalid-frm': btnSubmit && frm['rfc'].errors }" formControlName="rfc">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="telefono">Telefono
+                    <small *ngIf="btnSubmit && frm['telefono'].errors" class="invalid-feedback-frm">
+                        <small *ngIf="frm['telefono'].errors?.['required']">* Por favor, ingresa un telefono</small>
+                    </small>
+                </label>
+                <input type="text" class="form-control" id="telefono" [ngClass]="{ 'is-invalid-frm': btnSubmit && frm['telefono'].errors }" formControlName="telefono">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="stAutorization">Estatus</label>
+                <select class="form-control" id="stAutorization" formControlName="stAutorization" (ngModelChange)="changeEstatus($event)">
+                    <option *ngFor="let estatu of estatus" [value]="estatu.id"> {{estatu.descripcion}} </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row" *ngIf="fromDisable && estatusProspecto == 3">
+            <div class="form-group col-md-12">
+                <label for="fullDireccion">Motivo
+                    <small *ngIf="btnSubmit && frm['motivo'].errors" class="invalid-feedback-frm">
+                        <small *ngIf="frm['motivo'].errors?.['required']">* Por favor, ingresa un motivo</small>
+                    </small>
+                </label>
+                <input type="text" class="form-control" id="motivo" [ngClass]="{ 'is-invalid-frm': btnSubmit && frm['motivo'].errors }" formControlName="motivo">
+            </div>
+        </div>        
+
+
+        <!-- ARCHIVOS -->
+        <div *ngIf="!fromDisable">
+            <div class="clearfix mt-3">
+                <h5 class="h5 float-left">Cargar Archivos</h5>
+                <button 
+                    type="button" 
+                    class="btn btn-outline-dark float-right" (click)="addNewArchivo()"
+                    data-toggle="tooltip" data-placement="top" title="agregar otro archivo"> 
+                    <i class="fa-solid fa-plus"></i> 
+                </button>
+            </div>
+    
+            <div class="form-row" *ngFor="let file of addFile">
+                <div class="form-group col-md-12">
+                    <label for="archivos">
+                        <small *ngIf="btnSubmit && files.length == 0" class="invalid-feedback-frm">
+                            <small>* Por favor, agrega un archivo</small>
+                        </small>
+                    </label>
+                    <input type="file" class="form-control" id="archivos" (change)="getArchivos($event)" [ngClass]="{ 'is-invalid-frm': btnSubmit && files.length == 0 }">
+                </div>            
+            </div>
+
+            <!-- <button type="submit" class="btn btn-outline-dark float-right" (click)="loadArchivos()"> Enviar </button> -->
+        </div>
+
+
+        <div *ngIf="fromDisable && archivos.length>0">
+            
+            <div class="clearfix mt-3">
+                <h5 class="h5 float-left">Archivos</h5>
+            </div>
+
+            <table class="table table-striped" *ngIf="archivos.length>0">
+                <tr >
+                    <td>Nombre</td>
+                    <td> Acciones </td>
+            
+                </tr>
+            
+            
+                <tr  *ngFor="let item of archivos">
+                    <td> {{ item.nombre }} </td>
+                    <td> 
+                        <a [href]="item.path" [title]="item.nombre" target="_blank" rel="noopener noreferrer">
+                            <i class="fa-solid fa-eye"></i>   
+                        </a>              
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- FIN ARCHIVOS -->
+        
+        <div class="clearfix"  *ngIf="fromDisable">
+            <button type="submit" class="btn btn-outline-dark float-right" (click)="onStatus()" *ngIf="fromDisable && estatusProspecto != 1"> Estatus </button>
+            <button type="submit" class="btn btn-outline-dark float-right" (click)="goProspecto()"> Salir </button>
+        </div>
+
+        <div class="clearfix"  *ngIf="!fromDisable">
+            <button type="submit" class="btn btn-outline-dark float-right" (click)="onSumbit()"> Registrar </button>
+            <button type="button" class="btn btn-outline-dark float-right" (click)="goBack()"> Salir </button>
+        </div>
+
+
+
+    </form>
+</div>

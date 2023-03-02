@@ -1,0 +1,33 @@
+<div class="container mt-3">   
+    <div class="clearfix">
+        <h1 class="h1 float-left">Prospectos</h1>
+        <button type="button" class="btn btn-outline-dark float-right" (click)="nuevo()"> Nuevo </button>
+      </div>
+    <table class="table table-striped" *ngIf="prospectos.length>0">
+        <tr >
+            <td>Nombre</td>
+            <td>A. Materno</td>
+            <td>A. Paterno</td>
+            <td> Estatus </td>
+            <td colspan="2"> Acciones </td>
+    
+        </tr>
+    
+    
+        <tr  *ngFor="let item of prospectos" (dblclick)="goDetail(item.prospectoId)">
+            <td> {{ item.nombre }} </td>
+            <td> {{ item.apMaterno }} </td>
+            <td> {{ item.apPaterno }} </td>
+            <td> {{ item.authorization }} </td>
+            <td (click)="goDetail(item.prospectoId)"> 
+                <i class="fa-solid fa-eye" data-toggle="tooltip" data-placement="top" title="Ver Prospecto" ></i>                 
+            </td>    
+            <td  (click)="goEvaluate(item.prospectoId)">
+                <i class="fa-solid fa-user-check" data-toggle="tooltip" data-placement="top" title="Evaluar Prospecto"></i>
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+

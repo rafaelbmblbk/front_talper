@@ -1,0 +1,12 @@
+$red: #d14c4c;
+
+
+.is-invalid-frm {
+    border: 2px solid $red;
+    border-radius: none;
+}
+
+.invalid-feedback-frm{
+    color: $red;
+    font-size: 1rem;
+}
