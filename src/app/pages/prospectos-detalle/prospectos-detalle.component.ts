@@ -60,7 +60,7 @@ export class ProspectosDetalleComponent implements OnInit {
       colonia:        [{value: null , disabled: this.fromDisable},[Validators.required]],
       cp:             [{value: null , disabled: this.fromDisable},[Validators.required]],
       telefono:       [{value: null , disabled: this.fromDisable},[Validators.required]],
-      rfc:            [{value: null , disabled: this.fromDisable},[Validators.required]],
+      rfc:            [{value: null , disabled: this.fromDisable},[Validators.required,Validators.pattern(/^([a-zA-Z&]{3,4})(-{0,1})(\d\d)(0[1-9]|1[012])(0[1-9]|[12]\d|30|31)(-{0,1})([a-zA-Z\w]{3})$/)]],
       authorization:  [{value: null , disabled: !this.fromDisable},[]],
       stAutorization: [{value: null , disabled: !this.fromDisable},[]],
       prospectoId:    [{value: null , disabled: this.fromDisable},[]],
@@ -89,6 +89,7 @@ export class ProspectosDetalleComponent implements OnInit {
 
   }
 
+  estatusbd:boolean = false
   loadForms(pr:Prospecto){
     this.prospectoForm.setValue({
       nombre:         pr.nombre,
@@ -107,6 +108,8 @@ export class ProspectosDetalleComponent implements OnInit {
       motivo:         pr.motivo
     });
 
+    if(pr.stAutorization == 3) this.estatusbd = true
+
     let disabled: boolean = false
     
     if(this.prospectoId != 0) disabled = true
@@ -123,7 +126,7 @@ export class ProspectosDetalleComponent implements OnInit {
         colonia:        [{value: pr.colonia , disabled: this.fromDisable},[Validators.required]],
         cp:             [{value: pr.cp , disabled: this.fromDisable},[Validators.required]],
         telefono:       [{value: pr.telefono , disabled: this.fromDisable},[Validators.required]],
-        rfc:            [{value: pr.rfc , disabled: this.fromDisable},[Validators.required]],
+        rfc:            [{value: pr.rfc , disabled: this.fromDisable},[Validators.required,Validators.pattern(/^([a-zA-Z&]{3,4})(-{0,1})(\d\d)(0[1-9]|1[012])(0[1-9]|[12]\d|30|31)(-{0,1})([a-zA-Z\w]{3})$/)]],
         authorization:  [{value: pr.authorization , disabled: disabled},[]],
         stAutorization: [{value: pr.stAutorization , disabled: disabled},[]],
         prospectoId:    [{value: pr.prospectoId , disabled: this.fromDisable},[]],
